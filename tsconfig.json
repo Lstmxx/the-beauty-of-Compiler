@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "declarationDir": "./dist/types",
+    "declaration": true,
+  },
+}

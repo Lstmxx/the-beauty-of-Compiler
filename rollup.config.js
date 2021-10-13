@@ -1,0 +1,20 @@
+import typescript from 'rollup-plugin-typescript2';
+import del from 'rollup-plugin-delete';
+
+export default {
+  input: 'src/实现一门脚本语言 · 原理篇/finite-state-machine/index.ts',
+  output: [
+    {
+      dir: 'dist/cjs/index.js',
+      format: 'cjs',
+    },
+    {
+      dir: 'dist/esm/index.js',
+      format: 'esm'
+    }
+  ],
+  plugins: [
+    del({ targets: 'dist' }),
+    typescript({ tsconfig: './tsconfig.json', useTsconfigDeclarationDir: true })
+  ],
+};
