@@ -2,7 +2,7 @@ import typescript from 'rollup-plugin-typescript2';
 import del from 'rollup-plugin-delete';
 
 export default {
-  input: 'src/实现一门脚本语言 · 原理篇/finite-state-machine/index.ts',
+  input: 'src/index.ts',
   output: [
     {
       dir: 'dist/cjs/index.js',
