@@ -51,6 +51,12 @@ const initToken = (ch: string) => {
     _state = MACHINE_STATE.SLASH;
   } else if (ch === tokenReg.STAR) {
     _state = MACHINE_STATE.STAR;
+  } else if (ch === tokenReg.SEMI) {
+    _state = MACHINE_STATE.SEMI;
+  } else if (ch === tokenReg.LEFT_PAREN) {
+    _state = MACHINE_STATE.LEFT_PAREN;
+  } else if (ch === tokenReg.RIGHT_PAREN) {
+    _state = MACHINE_STATE.RIGHT_PAREN;
   } else {
     _state = MACHINE_STATE.INITIAL;
   }
@@ -118,6 +124,15 @@ export const lexer = (sentence: string) => {
         } else {
           state = initToken(ch);
         }
+        break;
+      case MACHINE_STATE.SEMI:
+        state = initToken(ch);
+        break;
+      case MACHINE_STATE.LEFT_PAREN:
+        state = initToken(ch);
+        break;
+      case MACHINE_STATE.RIGHT_PAREN:
+        state = initToken(ch);
         break;
       default:
         break;

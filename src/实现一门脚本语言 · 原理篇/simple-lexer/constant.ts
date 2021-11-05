@@ -22,6 +22,12 @@ export enum MACHINE_STATE {
   STAR = 'star',
   // 除法
   SLASH = 'slash',
+  // 分号
+  SEMI = 'semi',
+  // 左括号
+  LEFT_PAREN = 'left_paren',
+  // 右括号
+  RIGHT_PAREN = 'RIGHT_PAREN',
 };
 
 // token正则
@@ -34,4 +40,7 @@ export const tokenReg = {
   MINUS: '-',
   STAR: '*',
   SLASH: '/',
+  SEMI: ';',
+  LEFT_PAREN: '(',
+  RIGHT_PAREN: ')',
 };
