@@ -28,7 +28,7 @@ let token: IToken = {
   text: '',
   type: state,
 };
-const tokenList: IToken[] = [];
+let tokenList: IToken[] = [];
 /**
  * 初始化token
  * @param {string} ch 当前字符
@@ -72,11 +72,23 @@ const initToken = (ch: string) => {
   token.text = ch;
   return _state;
 };
+
+// 初始化词法分析器
+const initLexer = () => {
+  tokenList = [];
+  state = MACHINE_STATE.INITIAL;
+  token = {
+    text: '',
+    type: state,
+  };
+};
+
 /**
  * 有限状态机
  * @param {string} sentence 当前语句
  */
 export const lexer = (sentence: string) => {
+  initLexer();
   const len = sentence.length;
   for(let i = 0; i < len; i++) {
     const ch = sentence[i];

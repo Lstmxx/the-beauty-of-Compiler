@@ -3,26 +3,10 @@ import { ASTNode } from './type';
 import { MACHINE_STATE } from '../simple-lexer/constant';
 import { AST_NODE_TYPE } from './constant';
 
-const variables = new Map<string, number>();
-
-const getVariable = (key: string) => {
-  if (variables.has(key)) {
-    const value = variables.get(key);
-    if (value !== null) {
-      return value;
-    } else {
-      throw new Error(`variable ${key} has not been set any value`);
-    }
-  } else {
-    throw new Error(`unknown variable: ${key}`);
-  }
-};
-
 // 语法解析：基础表达式
 const primary = (tokens: IToken[]) => {
   let node: ASTNode = null;
   let token = tokens[0];
-  console.log(tokens);
   if (token !== null) {
     if (token.type === MACHINE_STATE.NUMERIC_LITERAL) {
       token = tokens.shift();
@@ -60,9 +44,10 @@ const primary = (tokens: IToken[]) => {
 const multiplicative = (tokens: IToken[]) => {
   const child1 = primary(tokens);
   let node: ASTNode = child1;
-  let token = tokens[0];
-  if (child1 !== null && token !== null) {
-    if (token.type === MACHINE_STATE.STAR || token.type === MACHINE_STATE.SLASH) {
+  
+  while(true) {
+    let token = tokens[0];
+    if (token !== null && (token.type === MACHINE_STATE.STAR || token.type === MACHINE_STATE.SLASH)) {
       token = tokens.shift();
       const child2 = multiplicative(tokens);
       if (child2 !== null) {
@@ -76,6 +61,8 @@ const multiplicative = (tokens: IToken[]) => {
       } else {
         throw new Error('invalid multiplicative expression, expecting the right part.');
       }
+    } else {
+      break;
     }
   }
   return node;
@@ -153,7 +140,6 @@ const constDeclare = (tokens: IToken[]) => {
         valType: AST_NODE_TYPE.CONST,
         children: [],
       };
-      console.log('const: node', node);
       token = tokens[0];
       if (token !== null && token.type === MACHINE_STATE.ASSIGNMENT) {
         tokens.shift();
@@ -185,5 +171,5 @@ export const parse = (tokens: IToken[]) => {
   if (node === null) {
     node = assignmentStatement(tokens);
   }
-  console.log(node);
+  return node;
 };
