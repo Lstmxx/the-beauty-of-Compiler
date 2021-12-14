@@ -1,3 +1,8 @@
+/**
+ * 语法分析器
+ * 语法分析器是将词法分析器生成的词法数组进行分析，判断是否符合语法规则，如加减乘除，if else等。
+ */
+
 import { IToken } from '../simple-lexer/type';
 import { ASTNode } from './type';
 import { MACHINE_STATE } from '../simple-lexer/constant';

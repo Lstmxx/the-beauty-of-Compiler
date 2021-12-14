@@ -1,3 +1,9 @@
+/**
+ * 词法分析器
+ * 词法分析器的工作是低级别的分析：将字符或者字符序列转化成记号。
+ * 在谈论词法分析时，使用术语“词法记号”（简称记号）、“模式”和“词法单元”表示特定的含义。
+ */
+
 import { IMachineState, IToken } from './type';
 import { MACHINE_STATE, tokenReg } from './constant';
 
